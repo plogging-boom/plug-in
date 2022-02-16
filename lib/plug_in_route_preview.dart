@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:plug_in/plug_in_container.dart';
+import 'package:plug_in/plug_in_route_info.dart';
 
 class PlugInRoutePreview extends StatelessWidget {
-  final Color backGroundColor;
-  final Color middleColor;
+  final RoutePreview routePreview;
 
-  const PlugInRoutePreview(
-      {Key? key, required this.backGroundColor, required this.middleColor})
-      : super(key: key);
+  final int baseTop = 0;
+  const PlugInRoutePreview({
+    Key? key,
+    required this.routePreview,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: AlignmentDirectional.center,
       clipBehavior: Clip.none,
+      alignment: AlignmentDirectional.center,
       children: [
         PlugInContainer(
             height: 300,
             width: 230,
             useShadow: false,
-            child: const Icon(Icons.airplanemode_active),
-            color: backGroundColor),
+            child: Text(routePreview.imageUrl),
+            color: routePreview.backgroundColor),
         Positioned(
-          top: 250,
+          top: baseTop.toDouble() + 450,
           child: PlugInContainer(
               height: 105,
               width: 160,
@@ -31,23 +33,24 @@ class PlugInRoutePreview extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '1.3km',
+                      routePreview.distance.toString(),
                       style: TextStyle(
-                          color: backGroundColor,
+                          color: routePreview.backgroundColor,
                           fontSize: 25,
                           fontWeight: FontWeight.w800),
                     ),
                     Text(
-                      '2022.02.13',
-                      style: TextStyle(color: backGroundColor, fontSize: 15),
+                      routePreview.date,
+                      style: TextStyle(
+                          color: routePreview.backgroundColor, fontSize: 15),
                     )
                   ],
                 ),
               ),
-              color: middleColor),
+              color: routePreview.middleColor),
         ),
         Positioned(
-          top: 330,
+          top: baseTop.toDouble() + 530,
           child: PlugInContainer(
               height: 50,
               width: 50,
@@ -56,7 +59,7 @@ class PlugInRoutePreview extends StatelessWidget {
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white,
               ),
-              color: backGroundColor),
+              color: routePreview.backgroundColor),
         )
       ],
     );
