@@ -3,6 +3,8 @@ import 'package:plug_in/plug_in_route_detail_info.dart';
 
 import 'plug_in_route_detail.dart';
 
+// 잼민이
+
 void main() {
   runApp(const MyApp());
 }
