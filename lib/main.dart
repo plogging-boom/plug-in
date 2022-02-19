@@ -1,11 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:plug_in/plug_in_route_detail_info.dart';
 
+import 'firebase_options.dart';
 import 'plug_in_route_detail.dart';
-
 // 잼민이
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -75,6 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return const PlugInRouteDetail(
-        routeDetail: RouteDetail(3.5, 1, 352, 'imageUrl', 'memo'));
+        routeDetail: RouteDetail(2.5, 1, 352, 'imageUrl', 'memo'));
   }
 }

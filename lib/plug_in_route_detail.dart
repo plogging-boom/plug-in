@@ -146,7 +146,7 @@ class PlugInRouteDetail extends StatelessWidget {
         ));
   }
 
-  Widget PlugDistanceMap(double km, String imageurl) {
+  Widget PlugDistanceMap(double pluggingdistance, String imageurl) {
     return Column(
       children: <Widget>[
         Container(

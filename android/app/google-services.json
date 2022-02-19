@@ -1,0 +1,126 @@
+{
+  "project_info": {
+    "project_number": "1040166340050",
+    "project_id": "plug-in-6f160",
+    "storage_bucket": "plug-in-6f160.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040166340050:android:984cebfbb1c633ebc6340b",
+        "android_client_info": {
+          "package_name": "com.example.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040166340050-7g5fpnn87nf5hvsoe5j49as4c2u3m705.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA8TL2iK1O2r9WNVRq7vRUZnSp2VrM8RA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040166340050-7g5fpnn87nf5hvsoe5j49as4c2u3m705.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1040166340050-12gd5onvkrrg713m3junbl51611ipku1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Juone.plugIn"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040166340050:android:110a4562511ac22dc6340b",
+        "android_client_info": {
+          "package_name": "com.example.firebasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040166340050-3geis6ul5jnhpnq03rciv15alb0m0sup.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebasetest",
+            "certificate_hash": "cbe60bcdb3e78169128755bf8f323ab49f80b188"
+          }
+        },
+        {
+          "client_id": "1040166340050-7g5fpnn87nf5hvsoe5j49as4c2u3m705.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA8TL2iK1O2r9WNVRq7vRUZnSp2VrM8RA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040166340050-7g5fpnn87nf5hvsoe5j49as4c2u3m705.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1040166340050-12gd5onvkrrg713m3junbl51611ipku1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Juone.plugIn"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040166340050:android:724df39b73811e28c6340b",
+        "android_client_info": {
+          "package_name": "com.example.plug_in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040166340050-7g5fpnn87nf5hvsoe5j49as4c2u3m705.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA8TL2iK1O2r9WNVRq7vRUZnSp2VrM8RA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040166340050-7g5fpnn87nf5hvsoe5j49as4c2u3m705.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1040166340050-12gd5onvkrrg713m3junbl51611ipku1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Juone.plugIn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
