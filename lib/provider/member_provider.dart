@@ -46,9 +46,9 @@ class MemberProvider with ChangeNotifier {
     UserCredential userCredential =
         await _memberService.signIn(email: email, password: password);
     User user = userCredential.user!;
-    Map<String, dynamic> map = await _memberService.getMemberInfo(user.email!);
+    Map<String, dynamic>? map = await _memberService.getMemberInfo(user.email!);
     print(map);
-    _member = Member.toMember(user, map);
+    _member = Member.toMember(user, map!);
     notifyListeners();
   }
 

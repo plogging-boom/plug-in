@@ -11,7 +11,7 @@ class MemberPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => MemberProvider(),
-      child: MemberView(),
+      child: const MemberView(),
     );
   }
 }
