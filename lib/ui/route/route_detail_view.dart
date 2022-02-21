@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:plug_in/data/model/route.dart';
 import 'package:plug_in/provider/route_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../component/plug_in_route_preview.dart';
 import '../component/plug_in_container.dart';
 

@@ -20,5 +20,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       home: MainPage(),
     );
+    final User? user = result.user;
+    if (user == null) {
+      final snackBar = SnackBar(
+        content: Text("Please try again later."),
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+    }
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => MainPage(email: user!.email!),
+    //   ),
+    // );
   }
 }

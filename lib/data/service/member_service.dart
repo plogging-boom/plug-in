@@ -37,7 +37,6 @@ class MemberService {
   logOut() async {
     await _memberRepository.logOut();
   }
-
   getMemberInfo(String email) async {
     Map<String, dynamic>? map;
     await MemberRepository(email: email)
