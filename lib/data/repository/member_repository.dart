@@ -1,4 +1,6 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class MemberRepository {
@@ -10,6 +12,7 @@ class MemberRepository {
       _db = FirebaseFirestore.instance.collection("member-info").doc(email);
     }
   }
+
 
   signUp({required String email, required String password}) async {
     await _auth.createUserWithEmailAndPassword(
