@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:plug_in/ui/component/plug_in_container.dart';
 import 'package:plug_in/provider/member_provider.dart';
+import 'package:plug_in/ui/component/plug_in_container.dart';
 import 'package:provider/provider.dart';
 
+//1
 class MemberView extends StatelessWidget {
   const MemberView({Key? key}) : super(key: key);
 
@@ -18,14 +19,14 @@ class MemberView extends StatelessWidget {
               child: Text("가입"),
               onPressed: () {
                 member.signUp(
-                    email: "dohun31@naver.com", password: "qorehgns31");
+                    email: "dnddl8280@naver.com", password: "woong12345");
               },
             ),
             FloatingActionButton(
               child: Text("로긘"),
               onPressed: () {
                 member.signIn(
-                    email: "dohun31@naver.com", password: "qorehgns31");
+                    email: "dnddl8280@naver.com", password: "woong12345");
               },
             ),
             FloatingActionButton(
