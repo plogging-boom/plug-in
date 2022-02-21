@@ -1,12 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:plug_in/ui/component/plug_in_profile_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:plug_in/ui/member/member_view.dart';
+import 'package:flutter/material.dart';
+import 'package:plug_in/plug_in_route_detail_info.dart';
 import 'package:plug_in/ui/member/member_page.dart';
 import 'package:plug_in/ui/route/route_page.dart';
 
 import 'firebase_options.dart';
+import 'plug_in_route_detail.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Test"),
+          title: const Text("Test"),
         ),
         body: Column(
           children: [
@@ -38,127 +37,52 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Test extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Test"),
-      ),
-      body: Stack(
-        children: [_inputForm(size), _authButton(size, context)],
-      ),
-    );
-  }
-
-  Widget _inputForm(Size size) => Padding(
-        padding: EdgeInsets.all(size.width * 0.05),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          elevation: 6,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 12.0,
-              top: 12.0,
-              bottom: 32.0,
-            ),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.account_circle),
-                      labelText: "Email",
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please input correct email";
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.vpn_key),
-                      labelText: "Password",
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please input correct password";
-                      }
-                      return null;
-                    },
-                  ),
-                  Container(
-                    height: 8,
-                  ),
-                  Text("Forgot Password"),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-
-  Widget _authButton(Size size, BuildContext context) => Positioned(
-        left: size.width * 0.15,
-        right: size.width * 0.15,
-        bottom: 0,
-        child: SizedBox(
-          height: 50.0,
-          child: RaisedButton(
-            color: Colors.blue,
-            child: Text(
-              "Join",
-              style: const TextStyle(fontSize: 20.0, color: Colors.white),
-            ),
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                print(_emailController.toString());
-                _register(context);
-                print(FirebaseAuth.instance.currentUser);
-              }
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0)),
-          ),
-        ),
-      );
-
-  void _register(BuildContext context) async {
-    final UserCredential result = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: _emailController.text, password: _passwordController.text)
-        .catchError(
-      (e) {
-        print(e.toString());
-      },
-    );
-    final User? user = result.user;
-    if (user == null) {
-      final snackBar = SnackBar(
-        content: Text("Please try again later."),
-      );
-      Scaffold.of(context).showSnackBar(snackBar);
-    }
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => MainPage(email: user!.email!),
-    //   ),
-    // );
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return const PlugInRouteDetail(
+        routeDetail: RouteDetail(
+            pluggingDistance: 3.5,
+            pluggingTime: 1,
+            kcal: 235,
+            imageUrl: 'imageUrl',
+            memo: 'memo'));
   }
 }
