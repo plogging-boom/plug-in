@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plug_in/plug_in_container.dart';
+import 'package:plug_in/ui/component/plug_in_container.dart';
 
 class PlugInRoutePreview extends StatelessWidget {
   final Color backGroundColor;
