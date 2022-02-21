@@ -14,8 +14,12 @@ class RouteService {
   loadRoutes() async {
     List<PlugInRoute> routes = [];
     await _routeRepository.loadRoutes().then((value) => value.docs).then(
-        (value) => value.forEach((element) =>
-            routes.add(PlugInRoute.fromMap(element.data(), element.id))));
+          (value) => value.forEach(
+            (element) => routes.add(
+              PlugInRoute.fromMap(element.data(), element.id),
+            ),
+          ),
+        );
     return routes;
   }
 }

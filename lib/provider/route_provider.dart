@@ -20,6 +20,7 @@ class RouteProvider with ChangeNotifier {
 
   loadRoutes() async {
     _routes = await _routeService.loadRoutes();
+    // _routes.forEach((element) => print(element.rid));
     notifyListeners();
   }
 }

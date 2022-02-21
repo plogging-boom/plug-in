@@ -2,7 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:plug_in/data/repository/member_repository.dart';
 
 class MemberService {
-  static MemberRepository _memberRepository = MemberRepository();
+  late MemberRepository _memberRepository;
+
+  MemberService({String? email}) {
+    if (email != null) {
+      _memberRepository = MemberRepository(email: email);
+    }
+    _memberRepository = MemberRepository();
+  }
 
   signUp({required String email, required String password}) async {
     try {
@@ -29,5 +36,12 @@ class MemberService {
 
   logOut() async {
     await _memberRepository.logOut();
+  }
+  getMemberInfo(String email) async {
+    Map<String, dynamic>? map;
+    await MemberRepository(email: email)
+        .getMemberInfo()
+        .then((value) => map = value.data());
+    return map;
   }
 }

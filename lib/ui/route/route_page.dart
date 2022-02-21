@@ -12,6 +12,5 @@ class RoutePage extends StatelessWidget {
       create: (context) => RouteProvider(),
       child: RouteDetailView(),
     );
-    ;
   }
 }
