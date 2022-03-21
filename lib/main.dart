@@ -1,11 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plug_in/plug_in_route_detail_info.dart';
-import 'package:plug_in/ui/member/member_page.dart';
 import 'package:plug_in/ui/route/route_page.dart';
 
 import 'firebase_options.dart';
-import 'plug_in_route_detail.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,17 +19,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Test"),
-        ),
-        body: Column(
-          children: [
-            MemberPage(),
-            RoutePage(),
-          ],
-        ),
+        body: RoutePage(),
       ),
     );
   }
@@ -77,12 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return const PlugInRouteDetail(
-        routeDetail: RouteDetail(
-            pluggingDistance: 3.5,
-            pluggingTime: 1,
-            kcal: 235,
-            imageUrl: 'imageUrl',
-            memo: 'memo'));
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('flutter demo page'),
+      ),
+    );
   }
 }

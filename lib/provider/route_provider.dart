@@ -4,6 +4,29 @@ import 'package:plug_in/data/service/route_service.dart';
 
 //1
 class RouteProvider with ChangeNotifier {
+  // 동작 , 상태는 provider
+  bool _isPressed = false;
+  String _memoText = 'memo';
+  bool _savedPressed = false;
+  String? _memoId;
+
+  int clickCheckCount = 0;
+
+  bool get isPressed => _isPressed;
+  String get memoText => _memoText;
+  bool get savedPressed => _savedPressed;
+
+  void onPressed() {
+    _isPressed = true;
+    notifyListeners();
+  }
+
+  void fillMemo(String content) {
+    _memoText = content;
+    onPressed();
+    notifyListeners();
+  }
+
   List<PlugInRoute> _routes = [];
   RouteService _routeService = RouteService(email: "dnddl8280@naver.com");
 
@@ -22,5 +45,31 @@ class RouteProvider with ChangeNotifier {
   loadRoutes() async {
     _routes = await _routeService.loadRoutes();
     notifyListeners();
+  }
+
+  List<Memo> list = [];
+  final MemoService _MemoService = MemoService();
+
+  MemoProvider() {
+    readDatas();
+  }
+
+  insertData(String value) async {
+    await _MemoService.insertData(value).then((value) {
+      _memoId = value.id;
+    });
+    print(_memoId);
+    readDatas();
+  }
+
+  readDatas() async {
+    list = await _MemoService.readDatas();
+    notifyListeners();
+  }
+
+  updateData(String text) async {
+    await _MemoService.updateData(text, _memoId!);
+    readDatas();
+    // TODO update
   }
 }

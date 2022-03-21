@@ -18,12 +18,13 @@ class RouteDetailView extends StatelessWidget {
               onPressed: () {
                 route.addRoute(
                   PlugInRoute(
-                      imageUrl: "du",
-                      distance: 5.0,
-                      ploggingDate: "ploggingDate",
-                      createdDate: "createdDate",
-                      backgroundColor: "backgroundColor",
-                      middleColor: "middleColor"),
+                    imageUrl: "du",
+                    distance: 5.0,
+                    ploggingDate: "ploggingDate",
+                    createdDate: "createdDate",
+                    backgroundColor: "backgroundColor",
+                    middleColor: "middleColor",
+                  ),
                 );
               },
             ),
