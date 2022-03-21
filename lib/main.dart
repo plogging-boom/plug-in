@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:plug_in/ui/google_map/google_map_page.dart';
 import 'package:plug_in/ui/main/main_page.dart';
 import 'firebase_options.dart';
 
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      home: MainPage(),
+      initialRoute: '/google-map',
+      routes: {
+        "/": (BuildContext context) => MainPage(),
+        "/google-map": (BuildContext context) => GoogleMapPage(),
+      },
     );
   }
 }

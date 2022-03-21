@@ -28,7 +28,7 @@ class RouteDetailView extends StatelessWidget {
                             const Duration(milliseconds: 200),
                         pageBuilder: (context, animation, secondaryAnimation) {
                           return Scaffold(
-                            backgroundColor: Colors.black12.withOpacity(0.2),
+                            backgroundColor: Colors.black12.withOpacity(0.6),
                             body: GestureDetector(
                               onTap: () {
                                 Navigator.of(context).pop();

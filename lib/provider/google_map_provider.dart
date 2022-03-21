@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart';
 
 class GoogleMapProvider with ChangeNotifier {
   bool _isStart = false;
@@ -8,5 +9,9 @@ class GoogleMapProvider with ChangeNotifier {
   void toggle() {
     _isStart = !_isStart;
     notifyListeners();
+  }
+
+  void test() {
+    BackgroundGeolocation.locations;
   }
 }

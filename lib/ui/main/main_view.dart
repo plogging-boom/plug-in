@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:plug_in/ui/component/plug_in_appbar.dart';
+import 'package:plug_in/ui/component/plug_in_bottom_navigation_bar.dart';
+import 'package:plug_in/ui/component/plug_in_drawer.dart';
 import 'package:plug_in/ui/component/plug_in_route_preview.dart';
 import 'package:plug_in/provider/member_test_provider.dart';
 import 'package:plug_in/ui/component/plug_in_container.dart';
@@ -13,10 +16,13 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: PlugInAppBar(title: "Plug In"),
+      endDrawer: PlugInDrawer(),
       body: SafeArea(
         child: Column(
           children: [
-            _appBar(),
+            // _appBar(),
             Flexible(
               fit: FlexFit.tight,
               child: _main(context),
@@ -24,6 +30,7 @@ class MainView extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: PlugInBottomNavigationBar(),
     );
   }
 
@@ -161,23 +168,6 @@ class MainView extends StatelessWidget {
               color: const Color(0xFFABF55D),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              memberProvider.signIn(
-                  email: "dohun31@naver.com", password: "qorehgns31");
-            },
-            child: Center(
-              child: Text("Plogging!!!!"),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              print(memberProvider.member.address);
-            },
-            child: Center(
-              child: Text("주소 확인!!!!"),
-            ),
-          )
         ],
       ),
     );

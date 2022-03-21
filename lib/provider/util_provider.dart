@@ -5,6 +5,7 @@ class UtilProvider with ChangeNotifier {
   Color _themeColor = Colors.lightGreen;
   int _drawerIndex = 0;
   late List<DrawerTile> _drawerList;
+  int _navIndex = 1;
 
   UtilProvider() {
     _drawerList = [
@@ -31,6 +32,7 @@ class UtilProvider with ChangeNotifier {
     ];
   }
 
+  int get navIndex => _navIndex;
   bool get canSeeDetail => _canSeeDetail;
   Color get themeColor => _themeColor;
   List<DrawerTile> get drawerList => _drawerList;
@@ -38,6 +40,11 @@ class UtilProvider with ChangeNotifier {
 
   void toggleDetailButton() {
     _canSeeDetail = !_canSeeDetail;
+    notifyListeners();
+  }
+
+  void setNavIndex(int navIndex) {
+    _navIndex = navIndex;
     notifyListeners();
   }
 
