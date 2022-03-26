@@ -18,10 +18,17 @@ class MemberProvider with ChangeNotifier {
     weight: 35.0,
     name: "Baek Dohun",
   );
-  bool _selectLogin = false;
+  bool _selectLogin = true;
+  String _selectedValue = "Select Country";
+  String? email;
+  String? password;
+  String? weight;
+  List<String> _valueList = ['Select Country', 'korea', 'United States'];
 
   Member get member => _member!;
-  get selectLogin => _selectLogin;
+  bool get selectLogin => _selectLogin;
+  get selectedValue => _selectedValue;
+  List<String> get valueList => _valueList;
 
   void toggle() {
     _selectLogin = !_selectLogin;
@@ -31,7 +38,6 @@ class MemberProvider with ChangeNotifier {
   bool auth() {
     User? user = _auth.currentUser;
     if (user != null) {
-      print(user.email);
       return true;
     }
     return false;
@@ -47,12 +53,16 @@ class MemberProvider with ChangeNotifier {
         await _memberService.signIn(email: email, password: password);
     User user = userCredential.user!;
     Map<String, dynamic>? map = await _memberService.getMemberInfo(user.email!);
-    print(map);
     _member = Member.toMember(user, map!);
     notifyListeners();
   }
 
   logOut() async {
     await _memberService.logOut();
+  }
+
+  void changeSelectValue(String value) {
+    _selectedValue = value;
+    notifyListeners();
   }
 }

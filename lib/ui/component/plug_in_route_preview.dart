@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:plug_in/ui/component/plug_in_container.dart';
 
-class PlugInRoutePreview extends StatelessWidget {
-  final Color backGroundColor;
-  final Color middleColor;
+import '../../data/model/route_preview.dart';
 
-  const PlugInRoutePreview(
-      {Key? key, required this.backGroundColor, required this.middleColor})
-      : super(key: key);
+class PlugInRoutePreview extends StatelessWidget {
+  final RoutePreview routePreview;
+
+  final int baseTop = 0;
+  const PlugInRoutePreview({
+    Key? key,
+    required this.routePreview,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: AlignmentDirectional.center,
       clipBehavior: Clip.none,
+      alignment: AlignmentDirectional.topCenter,
       children: [
         PlugInContainer(
-            height: 300,
-            width: 230,
+            height: 250,
+            width: 220,
             useShadow: false,
-            child: const Icon(Icons.airplanemode_active),
-            color: backGroundColor),
+            child: Image.asset(routePreview.imageUrl),
+            color: routePreview.backgroundColor),
         Positioned(
-          top: 250,
+          bottom: 0,
           child: PlugInContainer(
+              useShadow: false,
               height: 105,
               width: 160,
               child: Center(
@@ -31,33 +35,34 @@ class PlugInRoutePreview extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '1.3km',
+                      routePreview.distance.toString() + "km",
                       style: TextStyle(
-                          color: backGroundColor,
+                          color: routePreview.backgroundColor,
                           fontSize: 25,
                           fontWeight: FontWeight.w800),
                     ),
                     Text(
-                      '2022.02.13',
-                      style: TextStyle(color: backGroundColor, fontSize: 15),
+                      routePreview.date,
+                      style: TextStyle(
+                          color: routePreview.backgroundColor, fontSize: 15),
                     )
                   ],
                 ),
               ),
-              color: middleColor),
+              color: routePreview.middleColor),
         ),
-        Positioned(
-          top: 330,
-          child: PlugInContainer(
-              height: 50,
-              width: 50,
-              useShadow: false,
-              child: const Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: Colors.white,
-              ),
-              color: backGroundColor),
-        )
+        // Positioned(
+        //   bottom: 0,
+        //   child: PlugInContainer(
+        //       height: 50,
+        //       width: 50,
+        //       useShadow: false,
+        //       child: const Icon(
+        //         Icons.arrow_forward_ios_rounded,
+        //         color: Colors.white,
+        //       ),
+        //       color: routePreview.backgroundColor),
+        // )
       ],
     );
   }
