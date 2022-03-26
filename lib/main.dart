@@ -1,47 +1,66 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:plug_in/plug_in_route_preview.dart';
+import 'package:plug_in/provider/route_provider.dart';
+import 'package:plug_in/provider/util_provider.dart';
+import 'package:plug_in/ui/component/plug_in_appbar.dart';
+import 'package:plug_in/ui/component/plug_in_bottom_navigation_bar.dart';
+import 'package:plug_in/ui/member/member_page.dart';
+import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => RouteProvider()),
+        ChangeNotifierProvider(create: (context) => UtilProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MemberPage(),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class PlugIn extends StatelessWidget {
+  const PlugIn({Key? key}) : super(key: key);
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+    return Consumer<UtilProvider>(
+      builder: (context, utilProvider, child) => Scaffold(
+        appBar: PlugInAppBar(
+          title: "Plug In",
         ),
-        body: ListView(
-          children: const [
-            PlugInRoutePreview(
-                backGroundColor: Color(0xff31B48D),
-                middleColor: Color(0xffE2FFE9))
-          ],
-        ));
+        resizeToAvoidBottomInset: false,
+        bottomNavigationBar: PlugInBottomNavigationBar(),
+        body: SafeArea(child: utilProvider.children),
+      ),
+    );
+    final User? user = result.user;
+    if (user == null) {
+      final snackBar = SnackBar(
+        content: Text("Please try again later."),
+      );
+      Scaffold.of(context).showSnackBar(snackBar);
+    }
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => MainPage(email: user!.email!),
+    //   ),
+    // );
   }
 }
