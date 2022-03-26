@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plug_in/provider/trash_can_provider.dart';
 import 'package:plug_in/provider/util_provider.dart';
@@ -8,6 +9,8 @@ import 'package:plug_in/ui/component/plug_in_bottom_navigation_bar.dart';
 import 'package:plug_in/ui/component/plug_in_container.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/google_map_provider.dart';
+
 class TrashCanView extends StatelessWidget {
   TrashCanView({Key? key}) : super(key: key);
   final picker = ImagePicker();
@@ -15,24 +18,11 @@ class TrashCanView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TrashCanProvider>(
-      builder: (context, trashCanProvider, child) => Scaffold(
-        bottomNavigationBar: PlugInBottomNavigationBar(),
-        appBar: PlugInAppBar(
-          title: "TrashCan",
-        ),
-        body: SafeArea(
-          child: GestureDetector(
-            onTap: () {
-              print("hihi");
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                trashCanProvider.image == null ? _noImageView() : _imageView(),
-              ],
-            ),
-          ),
-        ),
+      builder: (context, trashCanProvider, child) => Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          trashCanProvider.image == null ? _noImageView() : _imageView(),
+        ],
       ),
     );
   }
@@ -47,7 +37,10 @@ class TrashCanView extends StatelessWidget {
         child: const PlugInContainer(
             height: 50.0,
             child: Center(
-              child: Text("Check"),
+              child: Text(
+                "Check",
+                style: TextStyle(color: Colors.white, fontSize: 20.0),
+              ),
             ),
             color: Colors.blueGrey),
       ),
@@ -55,17 +48,25 @@ class TrashCanView extends StatelessWidget {
   }
 
   Widget _applyBtn() {
-    return Consumer<TrashCanProvider>(
-      builder: (context, trashCanProvider, child) => GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: const PlugInContainer(
-            height: 50.0,
-            child: Center(
-              child: Text("Apply"),
-            ),
-            color: Colors.green),
+    return Consumer<GoogleMapProvider>(
+      builder: (context, googleMapProvider, child) =>
+          Consumer<TrashCanProvider>(
+        builder: (context, trashCanProvider, child) => GestureDetector(
+          onTap: () {
+            googleMapProvider.addMarker(35.13308851535174, 129.09695020869225,
+                BitmapDescriptor.defaultMarker);
+            Navigator.pop(context);
+          },
+          child: const PlugInContainer(
+              height: 50.0,
+              child: Center(
+                child: Text(
+                  "Apply",
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
+                ),
+              ),
+              color: Colors.green),
+        ),
       ),
     );
   }
@@ -81,15 +82,21 @@ class TrashCanView extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(50.0),
-                child: FloatingActionButton(
-                  heroTag: 'gallery',
-                  child: Icon(Icons.add_a_photo),
-                  tooltip: 'pick Iamge',
-                  onPressed: () {
+                child: GestureDetector(
+                  onTap: () {
                     getImage(ImageSource.gallery).then(
                       (path) => trashCanProvider.setImage(path),
                     );
                   },
+                  child: PlugInContainer(
+                    height: 60.0,
+                    width: 60.0,
+                    child: Icon(
+                      Icons.add_a_photo,
+                      color: Colors.white,
+                    ),
+                    color: Colors.black45,
+                  ),
                 ),
               ),
               const Text(
@@ -116,15 +123,18 @@ class TrashCanView extends StatelessWidget {
               color: Colors.black45,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
-                child: Image.file(
-                  trashCanProvider.image!,
+                child: Image.asset(
+                  "images/trash.jpeg",
                   fit: BoxFit.fill,
                 ),
               ),
             ),
             Text(
               trashCanProvider.checkComment,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
             trashCanProvider.btn ? _applyBtn() : _checkBtn(),
           ],

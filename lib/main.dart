@@ -1,7 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:plug_in/ui/google_map/google_map_page.dart';
-import 'package:plug_in/ui/main/main_page.dart';
+import 'package:plug_in/provider/route_provider.dart';
+import 'package:plug_in/provider/util_provider.dart';
+import 'package:plug_in/ui/component/plug_in_appbar.dart';
+import 'package:plug_in/ui/component/plug_in_bottom_navigation_bar.dart';
+import 'package:plug_in/ui/member/member_page.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -17,13 +21,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(),
-      initialRoute: '/google-map',
-      routes: {
-        "/": (BuildContext context) => MainPage(),
-        "/google-map": (BuildContext context) => GoogleMapPage(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => RouteProvider()),
+        ChangeNotifierProvider(create: (context) => UtilProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MemberPage(),
+      ),
+    );
+  }
+}
+
+class PlugIn extends StatelessWidget {
+  const PlugIn({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UtilProvider>(
+      builder: (context, utilProvider, child) => Scaffold(
+        appBar: PlugInAppBar(
+          title: "Plug In",
+        ),
+        resizeToAvoidBottomInset: false,
+        bottomNavigationBar: PlugInBottomNavigationBar(),
+        body: SafeArea(child: utilProvider.children),
+      ),
     );
   }
 }
